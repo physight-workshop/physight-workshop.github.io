@@ -28,7 +28,7 @@
     width: 100%;
     margin: 0;
     min-height: clamp(410px, 27vw, 540px);
-    background: #1b1015;
+    background: #f5e7d2;
     isolation: isolate;
   }
   .hero-art {
@@ -50,7 +50,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(18, 9, 14, .12), rgba(18, 9, 14, .16) 65%, rgba(18, 9, 14, .3));
+    background: linear-gradient(90deg, rgba(251,242,227,.05), rgba(251,242,227,.65) 35%, rgba(251,242,227,.65) 65%, rgba(251,242,227,.05));
     pointer-events: none;
   }
   .hero-body {
@@ -63,29 +63,29 @@
   .hero-body > .container { max-width: 1100px !important; }
   .page-header1 .columns { margin-bottom: 0; }
   .publication-title {
-    color: #fff;
+    color: #392c24;
     font-size: clamp(2.2rem, 3.3vw, 3.5rem) !important;
     font-weight: 700;
     line-height: 1.14;
     letter-spacing: -.025em;
     margin: 0 auto 1.5rem !important;
-    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+    text-shadow: none;
   }
   .publication-title span { display: block; }
   .conference-line {
-    color: #f8e8db;
+    color: #534034;
     max-width: 1000px;
     margin: 0 auto 1rem !important;
     font-size: 1.1rem !important;
     line-height: 1.5;
-    text-shadow: 0 1px 8px rgba(0,0,0,.4);
+    text-shadow: none;
   }
   .conference-details {
-    color: #f1e3dd;
+    color: #634d3d;
     font-size: 1rem;
     line-height: 1.5;
     margin-top: 0;
-    text-shadow: 0 1px 8px rgba(0,0,0,.4);
+    text-shadow: none;
   }
   .page-header1 .subtitle {
     display: flex;
@@ -161,7 +161,7 @@
       height: auto;
       mask-image: linear-gradient(180deg, transparent, #000 20%);
     }
-    .page-header1::before { background: linear-gradient(180deg, transparent 65%, rgba(18,9,14,.15)); }
+    .page-header1::before { display: none; }
     .hero-body { padding: 2.5rem 1.25rem calc(100vw / 3 + 1.5rem); }
     .publication-title { font-size: clamp(1.9rem, 5.2vw, 2.5rem) !important; }
     .conference-line { font-size: .9rem !important; }
@@ -183,7 +183,7 @@
 
 <body>
   <section class="hero page-header1" id="home">
-    <img class="hero-art" src="./data/banner-physight-copper.png" width="2172" height="724" alt="" aria-hidden="true" fetchpriority="high">
+    <img class="hero-art" src="./data/banner-physight-warm.png" width="2172" height="724" alt="" aria-hidden="true" fetchpriority="high">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
