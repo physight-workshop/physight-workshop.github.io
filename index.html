@@ -19,112 +19,93 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF4500' d='M16 5a11 11 0 1 0 10.4 14.6l-3.1-1.1A7.7 7.7 0 1 1 16 8.3V12l7-4.5L16 3z'/%3E%3C/svg%3E">
 
 <style>
-  /* PhySight banner — warm material studies of contact and deformation */
+  /* Full-width PhySight panorama; artwork retains its original aspect ratio. */
   .page-header1 {
     position: relative;
     display: grid;
-    width: calc(100% - 3rem);
-    max-width: 960px;
-    margin: 1.5rem auto 0;
-    background-color: #f5e7d2;
-    padding-bottom: 0;
-  }
-
-  .hero-art {
-    grid-area: 1 / 1;
-    align-self: end;
-    display: block;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
     width: 100%;
-    height: auto;
-    min-width: 0;
-    mask-image: linear-gradient(to bottom, transparent, #000 2rem);
+    margin: 0;
+    min-height: clamp(410px, 27vw, 540px);
+    background: #1b1015;
+    isolation: isolate;
   }
-
+  .hero-art {
+    position: absolute;
+    inset: auto auto 0 50%;
+    transform: translateX(-50%);
+    width: min(100%, 1620px);
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent), linear-gradient(180deg, transparent, #000 3rem);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
   .page-header1::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(251, 242, 227, 0.08), rgba(251, 242, 227, 0.72) 32%, rgba(251, 242, 227, 0.72) 68%, rgba(251, 242, 227, 0.08));
-  }
-
-  .hero-body {
-    grid-area: 1 / 1;
-    min-width: 0;
-    position: relative;
+    inset: 0;
     z-index: 1;
-    padding: 2rem 1.5rem 1.75rem;
+    background: linear-gradient(180deg, rgba(18, 9, 14, .12), rgba(18, 9, 14, .16) 65%, rgba(18, 9, 14, .3));
+    pointer-events: none;
   }
-
-  .page-header1 .columns {
-    margin-bottom: 0;
+  .hero-body {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-width: 0;
+    padding: 3rem 1.5rem 2.75rem;
   }
-
+  .hero-body > .container { max-width: 1100px !important; }
+  .page-header1 .columns { margin-bottom: 0; }
+  .publication-title {
+    color: #fff;
+    font-size: clamp(2.2rem, 3.3vw, 3.5rem) !important;
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: -.025em;
+    margin: 0 auto 1.5rem !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+  .publication-title span { display: block; }
+  .conference-line {
+    color: #f8e8db;
+    max-width: 1000px;
+    margin: 0 auto 1rem !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(0,0,0,.4);
+  }
+  .conference-details {
+    color: #f1e3dd;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 0;
+    text-shadow: 0 1px 8px rgba(0,0,0,.4);
+  }
   .page-header1 .subtitle {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: .5rem;
+    margin-top: 1.75rem !important;
   }
-
   .page-header1 .button {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.6rem;
-    height: auto;
-    margin-bottom: 0;
-  }
-
-  .publication-title {
-    color: #392c24;
-    font-weight: bold;
-    text-shadow: none;
-    font-size: 2.8rem !important;
-    line-height: 1.12;
-    margin-bottom: 1rem !important;
-  }
-
-  .publication-title span {
-    display: block;
-    font-size: clamp(1.45rem, 3.25vw, 2rem);
-    line-height: 1.2;
-    margin-top: 0.4rem;
-  }
-
-  .rcorners1 {
+    background: rgba(255,252,247,.95);
+    color: #532c25;
+    border: 1px solid rgba(255,255,255,.4);
     border-radius: 10px;
-    background: #ffffffd0;
-    padding: 5px;
-    font-size: 120%;
-    color: #e47d0f;
-  }
-
-  .button {
-    border-radius: 10px;
-    background: #ffffffe6;
-    padding: 5px 15px 5px 15px;
-    border-color: transparent;
-    color: #713e2c;
-    font-weight: 600;
-  }
-
-  .conference-line {
-    color: #534034;
-    text-shadow: none;
-    max-width: 660px;
-    margin: 0 auto 1rem !important;
-    font-size: 0.95rem !important;
-    line-height: 1.45;
-  }
-
-  .conference-details {
-    color: #634d3d;
     font-size: 1rem;
-    letter-spacing: 0.02em;
-    margin-top: -0.5rem;
-    text-shadow: none;
+    font-weight: 600;
+    height: auto;
+    margin: 0;
+    padding: .55rem .9rem;
   }
+  .page-header1 .button:hover { background: #fff; color: #8b412a; }
 
   /* Modern, clean style for organizers (verbatim from the e2e3d template) */
   .organizer-card {
@@ -169,30 +150,23 @@
 
   @media screen and (max-width: 1024px) {
     .organizer-photo { width: 120px; height: 120px; }
+    .page-header1 .button { font-size: .85rem; padding: .5rem .65rem; }
   }
   @media screen and (max-width: 768px) {
-    .hero-art { grid-area: 2 / 1; mask-image: none; }
-    .page-header1::before { display: none; }
-    .hero-body {
-      grid-area: 1 / 1;
-      padding: 1.75rem 1rem 1.5rem;
+    .page-header1 { min-height: 0; }
+    .hero-art {
+      inset: auto 0 0;
+      transform: none;
+      width: 100%;
+      height: auto;
+      mask-image: linear-gradient(180deg, transparent, #000 20%);
     }
-    .publication-title {
-      font-size: 2.1rem !important;
-      line-height: 1.1;
-    }
-    .conference-line {
-      font-size: 0.85rem !important;
-      line-height: 1.25;
-    }
-    .conference-details {
-      font-size: 0.9rem;
-      margin-top: 0;
-    }
-    .subtitle .button {
-      font-size: 0.9rem;
-      margin-bottom: 0.35rem;
-    }
+    .page-header1::before { background: linear-gradient(180deg, transparent 65%, rgba(18,9,14,.15)); }
+    .hero-body { padding: 2.5rem 1.25rem calc(100vw / 3 + 1.5rem); }
+    .publication-title { font-size: clamp(1.9rem, 5.2vw, 2.5rem) !important; }
+    .conference-line { font-size: .9rem !important; }
+    .conference-details { font-size: .9rem; }
+    .page-header1 .button { font-size: .85rem; padding: .45rem .65rem; }
     .has-text-justified {
       text-align: left !important;
     }
@@ -209,12 +183,12 @@
 
 <body>
   <section class="hero page-header1" id="home">
-    <img class="hero-art" src="./data/banner-physight-warm.png" width="2172" height="724" alt="" aria-hidden="true" fetchpriority="high">
+    <img class="hero-art" src="./data/banner-physight-copper.png" width="2172" height="724" alt="" aria-hidden="true" fetchpriority="high">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">PhySight<span>Inferring Hidden Physics from Video</span></h1>
+            <h1 class="title is-1 publication-title">PhySight: Inferring Hidden Physics<span>from Video</span></h1>
             <h2 class="title is-5 conference-line">
               <strong>Workshop proposal for the 2027 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2027)</strong>
             </h2>
