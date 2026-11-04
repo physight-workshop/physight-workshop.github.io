@@ -1,10 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PhySight</title>
-    <style>html, body { margin: 0; min-height: 100%; background: #fff; }</style>
-  </head>
-  <body></body>
+<head>
+<!-- Content synchronized from Overleaf revision 3b7335260bc5cf97ee427821fec4d75bb3b56f48; proposal details remain tentative. -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="PhySight: Inferring Hidden Physics from Video. A proposed CVPR 2027 workshop on physical scene understanding and visual-tactile learning.">
+<meta name="keywords" content="Physical Scene Understanding, Contact Estimation, Visual-Tactile Learning, CVPR 2027">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="PhySight — Inferring Hidden Physics from Video">
+<meta property="og:description" content="PhySight: Inferring Hidden Physics from Video. CVPR 2027 workshop proposal.">
+<meta property="og:type" content="website">
+<title>PhySight — Inferring Hidden Physics from Video</title>
+
+<link href="./data/css" rel="stylesheet">
+<link rel="stylesheet" href="./data/bulma.min.css">
+<link rel="stylesheet" href="./data/fontawesome.all.min.css">
+<link rel="stylesheet" href="./data/academicons.min.css">
+<link rel="stylesheet" href="./data/index.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF4500' d='M16 5a11 11 0 1 0 10.4 14.6l-3.1-1.1A7.7 7.7 0 1 1 16 8.3V12l7-4.5L16 3z'/%3E%3C/svg%3E">
+
+<style>
+  /* PhySight banner — warm material studies of contact and deformation */
+  .page-header1 {
+    position: relative;
+    display: grid;
+    width: calc(100% - 3rem);
+    max-width: 960px;
+    margin: 1.5rem auto 0;
+    background-color: #f5e7d2;
+    padding-bottom: 0;
+  }
+
+  .hero-art {
+    grid-area: 1 / 1;
+    align-self: end;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    mask-image: linear-gradient(to bottom, transparent, #000 2rem);
+  }
+
+  .page-header1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(251, 242, 227, 0.08), rgba(251, 242, 227, 0.72) 32%, rgba(251, 242, 227, 0.72) 68%, rgba(251, 242, 227, 0.08));
+  }
+
+  .hero-body {
+    grid-area: 1 / 1;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1.5rem 1.75rem;
+  }
+
+  .page-header1 .columns {
+    margin-bottom: 0;
+  }
+
+  .page-header1 .subtitle {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .page-header1 .button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .publication-title {
+    color: #392c24;
+    font-weight: bold;
+    text-shadow: none;
+    font-size: 2.8rem !important;
+    line-height: 1.12;
+    margin-bottom: 1rem !important;
+  }
+
+  .publication-title span {
+    display: block;
+    font-size: clamp(1.45rem, 3.25vw, 2rem);
+    line-height: 1.2;
+    margin-top: 0.4rem;
+  }
+
+  .rcorners1 {
+    border-radius: 10px;
+    background: #ffffffd0;
+    padding: 5px;
+    font-size: 120%;
+    color: #e47d0f;
+  }
+
+  .button {
+    border-radius: 10px;
+    background: #ffffffe6;
+    padding: 5px 15px 5px 15px;
+    border-color: transparent;
+    color: #713e2c;
+    font-weight: 600;
+  }
+
+  .conference-line {
+    color: #534034;
+    text-shadow: none;
+    max-width: 660px;
+    margin: 0 auto 1rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.45;
+  }
+
+  .conference-details {
+    color: #634d3d;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    margin-top: -0.5rem;
+    text-shadow: none;
+  }
+
+  /* Modern, clean style for organizers (verbatim from the e2e3d template) */
+  .organizer-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease-in-out;
+    height: 100%;
+  }
+
+  /* make every organizer card in a row stretch to the same height */
+  #Organizers .column { display: flex; }
+  #Organizers .column > a { display: block; width: 100%; }
+
+  .organizer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .organizer-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid #eee;
+  }
+
+  .organizer-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #222;
+    margin-bottom: 0.25rem;
+  }
+
+  .organizer-affiliation {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.2;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .organizer-photo { width: 120px; height: 120px; }
+  }
+  @media screen and (max-width: 768px) {
+    .hero-art { grid-area: 2 / 1; mask-image: none; }
+    .page-header1::before { display: none; }
+    .hero-body {
+      grid-area: 1 / 1;
+      padding: 1.75rem 1rem 1.5rem;
+    }
+    .publication-title {
+      font-size: 2.1rem !important;
+      line-height: 1.1;
+    }
+    .conference-line {
+      font-size: 0.85rem !important;
+      line-height: 1.25;
+    }
+    .conference-details {
+      font-size: 0.9rem;
+      margin-top: 0;
+    }
+    .subtitle .button {
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+    }
+    .has-text-justified {
+      text-align: left !important;
+    }
+    .organizer-photo { width: 100px; height: 100px; }
+    .organizer-name { font-size: 1rem; }
+    .organizer-affiliation { font-size: 0.8rem; }
+  }
+  .proposal-details { border-bottom: 1px solid #e8dfd6; padding: 1rem 0; }
+  .proposal-details summary { cursor: pointer; font-weight: 600; color: #713e2c; }
+  .proposal-details p, .proposal-details ul { margin-top: 0.75rem; }
+  .proposal-status { color: #634d3d; font-size: 0.95rem; }
+</style>
+</head>
+
+<body>
+  <section class="hero page-header1" id="home">
+    <img class="hero-art" src="./data/banner-physight-warm.png" width="2172" height="724" alt="" aria-hidden="true" fetchpriority="high">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">PhySight<span>Inferring Hidden Physics from Video</span></h1>
+            <h2 class="title is-5 conference-line">
+              <strong>Workshop proposal for the 2027 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2027)</strong>
+            </h2>
+            <p class="conference-details">Seattle, WA · Date and room to be announced</p>
+          </div>
+        </div>
+
+        <h2 class="subtitle has-text-centered" style="margin-top:1.25rem">
+          <a href="#motivation" class="button">Abstract</a>
+          <a href="#news" class="button">News</a>
+          <a href="#speakers" class="button">Speakers</a>
+          <a href="#schedule" class="button">Schedule</a>
+          <a href="#dates" class="button">Call for Papers</a>
+          <a href="#challenge" class="button">Challenge</a>
+          <a href="#sponsors" class="button">Sponsors</a>
+          <a href="#organizers" class="button">Organizers</a>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+<section class="section" id="motivation">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Abstract</h2>
+<div class="content has-text-justified">
+<p>Vision now infers geometry and motion at scale. PhySight targets what video does not show: the contact, force, friction, and mass that govern interaction and appear only through their effects. The workshop asks how much of this hidden physics can be inferred from video, as judged by instrument measurements. It compares generalist models with learned inverse models trained on measured touch and force. A challenge scores hand contact inferred from egocentric video against tactile-glove measurements from TouchScale. Models trained with and without touch are ranked separately. The program features papers, invited talks, a live visual-tactile demo, and awards.</p>
+<p><strong>What can video reveal?</strong> A first question is which hidden quantities the visual evidence determines and which it leaves ambiguous. Each quantity becomes visible through its own event, such as deformation for contact, slip for friction, and collision for mass. When that event is missing, a model should report its uncertainty. An agent can also act to create the event, as in interactive perception. Results that show what video cannot recover are as welcome as new methods.</p>
+<p><strong>How can models infer it?</strong> A second question is how models should solve this inverse problem, and two routes compete. Generalist models bring physical knowledge from pretraining and simulation. For example, a vision-language agent can rebuild the scene in a physics engine and tune it until the simulation matches the video. A video or world model can also act as the physics engine. Learned inverse models instead map video to hidden physics after training on recordings that pair video with measured touch and force. Scoring both routes against the same measurements shows where each works and how to combine them.</p>
+<p><strong>How can measurement verify it?</strong> A third question is how to tell whether an inference is right. Instruments such as tactile gloves and force sensors measure the hidden quantities while the camera records. Paired recordings serve as training data for learned inverse models and as ground truth for both routes. The first edition starts with hand contact. Every manipulation begins with contact, and tactile gloves record it at scale.</p>
+</div>
+  </div>
+</section>
+
+
+  <section class="section" id="news">
+  <div class="container is-max-desktop content">
+    <h2 class="title">News</h2>
+<div class="content has-text-justified"><ul>
+<li>PhySight is being prepared as a <strong>CVPR 2027 workshop proposal</strong>.</li>
+<li>The workshop date, room, and OpenReview link will be announced after workshop acceptance. The program and deadlines below are tentative proposal plans.</li>
+</ul></div>
+  </div>
+</section>
+
+  <section class="section" id="speakers" style="margin-top:-50px">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Invited Speakers</h2>
+<p>Participation status follows the current proposal. Talk titles will be announced.</p>
+<a href="https://jiajunwu.com/" target="_blank" rel="noopener">
+      <div class="card"><div class="card-content"><div class="columns is-vcentered">
+        <div class="column is-one-quarter"><figure class="image is-128x128"><img class="is-rounded" src="./assets/jiajun.jpg" alt="Jiajun Wu" style="width:128px;height:128px;object-fit:cover"></figure></div>
+        <div class="column"><p class="title is-4">Jiajun Wu</p><p class="subtitle is-6">Stanford University</p><p class="subtitle is-7">Physical inference, simulation, and video generative priors · Confirmed</p></div>
+      </div></div></div></a>
+<a href="https://geopavlakos.github.io/" target="_blank" rel="noopener">
+      <div class="card"><div class="card-content"><div class="columns is-vcentered">
+        <div class="column is-one-quarter"><figure class="image is-128x128"><img class="is-rounded" src="./assets/georgios.jpg" alt="Georgios Pavlakos" style="width:128px;height:128px;object-fit:cover"></figure></div>
+        <div class="column"><p class="title is-4">Georgios Pavlakos</p><p class="subtitle is-6">University of Texas at Austin</p><p class="subtitle is-7">3D hands, humans, and hand-object interactions · Tentative</p></div>
+      </div></div></div></a>
+<a href="https://people.eecs.berkeley.edu/~malik/" target="_blank" rel="noopener">
+      <div class="card"><div class="card-content"><div class="columns is-vcentered">
+        <div class="column is-one-quarter"><figure class="image is-128x128"><img class="is-rounded" src="./assets/jitendra.jpg" alt="Jitendra Malik" style="width:128px;height:128px;object-fit:cover"></figure></div>
+        <div class="column"><p class="title is-4">Jitendra Malik</p><p class="subtitle is-6">UC Berkeley &amp; Amazon FAR</p><p class="subtitle is-7">Physical scene understanding and hidden interaction conditions · Tentative</p></div>
+      </div></div></div></a>
+<a href="https://www.christianholz.net/" target="_blank" rel="noopener">
+      <div class="card"><div class="card-content"><div class="columns is-vcentered">
+        <div class="column is-one-quarter"><figure class="image is-128x128"><img class="is-rounded" src="./assets/christian.jpg" alt="Christian Holz" style="width:128px;height:128px;object-fit:cover"></figure></div>
+        <div class="column"><p class="title is-4">Christian Holz</p><p class="subtitle is-6">ETH Zurich</p><p class="subtitle is-7">Egocentric sensing of contact, pressure, and force · Tentative</p></div>
+      </div></div></div></a>
+<a href="https://www.robertocalandra.com/" target="_blank" rel="noopener">
+      <div class="card"><div class="card-content"><div class="columns is-vcentered">
+        <div class="column is-one-quarter"><figure class="image is-128x128"><img class="is-rounded" src="./assets/roberto.png" alt="Roberto Calandra" style="width:128px;height:128px;object-fit:cover"></figure></div>
+        <div class="column"><p class="title is-4">Roberto Calandra</p><p class="subtitle is-6">TU Dresden</p><p class="subtitle is-7">Vision, touch, and robotic manipulation · Tentative</p></div>
+      </div></div></div></a>
+
+  </div>
+</section>
+
+<section class="section" id="schedule">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Preliminary Schedule</h2>
+<p class="subtitle is-6 has-text-centered" style="margin-bottom:1rem">The proposed half-day workshop runs from 13:00 to 17:15. All times are local to Seattle. The exact date and room are TBD.</p>
+<div class="content has-text-justified"><table class="table table-striped"><thead><tr><th width="130">Time</th><th>Main program</th></tr></thead><tbody><tr><td>13:00–13:10</td><td style="background-color:#EFECCA">Opening and live test: can you see the physics?</td></tr>
+<tr><td>13:10–13:35</td><td style="background-color:#795663;color:#EFECCA">Keynote 1</td></tr>
+<tr><td>13:35–14:00</td><td style="background-color:#795663;color:#EFECCA">Keynote 2</td></tr>
+<tr><td>14:00–14:25</td><td style="background-color:#EFECCA">Oral session 1: three accepted papers</td></tr>
+<tr><td>14:25–15:05</td><td style="background-color:#EFECCA">Coffee break, posters, and live visual-tactile demo</td></tr>
+<tr><td>15:05–15:30</td><td style="background-color:#795663;color:#EFECCA">Keynote 3</td></tr>
+<tr><td>15:30–15:50</td><td style="background-color:#EFECCA">Challenge results, generalist-model report card, and two winner talks</td></tr>
+<tr><td>15:50–16:15</td><td style="background-color:#795663;color:#EFECCA">Keynote 4</td></tr>
+<tr><td>16:15–16:40</td><td style="background-color:#EFECCA">Oral session 2: three accepted papers</td></tr>
+<tr><td>16:40–17:05</td><td style="background-color:#795663;color:#EFECCA">Keynote 5</td></tr>
+<tr><td>17:05–17:15</td><td style="background-color:#EFECCA">Awards and closing</td></tr>
+</tbody></table></div>
+  </div>
+</section>
+
+<section class="section" id="Papers"><div class="container is-max-desktop content">
+<h2 class="title" id="dates">Call for Papers</h2>
+<p>We welcome work on physical scene understanding, visual-tactile learning, contact and force estimation, inverse physics, simulation, and evaluation of physical reasoning in generalist models.</p>
+<p>We plan to accept <strong>long papers of up to 8 pages</strong> and <strong>short papers of up to 4 pages</strong>, excluding references and supplementary material. Submissions will follow a double-blind review process using the CVPR paper format. The track is non-archival, with no CVF proceedings.</p>
+<p>In-progress work, negative results, uncertainty analyses, and recently published or encore work are welcome. The OpenReview submission site and template link will be announced after workshop acceptance.</p>
+<h3 class="title is-4">Important Dates <span class="is-size-6 has-text-weight-normal">(tentative)</span></h3>
+<ul><li><strong>Submission deadline:</strong> March 31, 2027, 23:59 AoE</li><li><strong>Reviews due:</strong> April 14, 2027, 23:59 AoE</li><li><strong>Author notification:</strong> April 19, 2027</li><li><strong>Camera-ready and poster:</strong> April 30, 2027, 23:59 AoE</li></ul>
+<details class="proposal-details"><summary>Submission and review policy</summary><p>Submissions follow the CVPR 2027 main conference style with the official template. We use double-blind review and enforce the CVPR conflict-of-interest policy. Each paper receives at least three reviews. A reserve of emergency reviewers keeps decisions on time. Accepted papers will be posted on the website and may also go on arXiv. All authors need complete OpenReview profiles.</p></details><details class="proposal-details"><summary>Tentative program committee</summary><p>The organizers serve as area chairs. We plan to recruit at least 30 reviewers, with no reviewer handling more than three papers. The proposed committee includes:</p><ul><li>Zhiwen Fan — Texas A&amp;M University</li><li>Guandao Yang — University of Texas at Austin</li><li>Yiyue Luo — University of Washington</li><li>Mustafa Mukadam — Amazon FAR and University of Washington</li><li>Alex Wong — Yale University</li><li>Dayou Li — Texas A&amp;M University</li><li>Nuo Chen — Texas A&amp;M University</li><li>Qianqian Wang — Harvard University</li></ul></details>
+</div></section>
+<section class="section" id="Challenge"><div class="container is-max-desktop content"><h2 class="title" id="challenge">Contact Prediction Challenge</h2><p class="proposal-status">Planned for 2027; subject to workshop acceptance. Dates and protocol follow the current proposal.</p>
+<p>The challenge applies the workshop's question to hand contact. Models infer from egocentric video when and where each hand touches something, and a tactile glove provides the ground truth.</p><p>Given a clip of head-camera video, predict for every frame the probability that each of the 30 glove pads (15 per hand) is in contact. Methods may use depth from the head camera. Wrist cameras and touch are not provided at test time. We release a map from each pad to regions of the MANO hand mesh, so methods that predict contact on the hand surface can enter.</p>
+<h3 class="title is-4">Two categories</h3><p>The categories separate the generalist and learned inverse approaches described above. The touch-supervised category may train on tactile signals, as learned inverse models do. The touch-free category is open to generalist models and may use video, depth, hand pose, simulation, pretrained models, and contact labels from geometry or human annotation. It may not use tactile, pressure, or force measurements from any dataset, or models trained on them. Both categories face the same hidden test set and are ranked separately, so the gap between them shows how much measured touch adds.</p>
+<h3 class="title is-4">Evaluation</h3><p>The primary metric is pad-level contact F1 at a 0.5 threshold over all frames and pads, averaged over Split A and Split B. Secondary metrics are the Brier score of the predicted probabilities, the median error in contact onset time, and the F1 gap between female and male participants in Split B. We also report F1 by hand size. Teams submit to an EvalAI server with a public validation leaderboard and a hidden test leaderboard. Each team may make at most three test submissions. We provide a touch-free baseline that lifts hands to 3D with HaMeR and labels contact by distance to the depth surface. A touch-supervised baseline trains a contact head on the same HaMeR features with glove labels. The organizers also report reference results for public generalist models in the touch-free category. We re-run the code of the top teams before announcing winners. Top teams are invited to co-author the challenge report.</p>
+<h3 class="title is-4">Challenge timeline <span class="is-size-6 has-text-weight-normal">(tentative)</span></h3>
+<table class="table is-fullwidth"><thead><tr><th>Date (2027)</th><th>Milestone</th></tr></thead><tbody>
+<tr><td>January 15</td><td>Official splits, baselines, and validation server open</td></tr>
+<tr><td>May 10</td><td>Test videos released</td></tr><tr><td>May 24</td><td>Submissions close</td></tr><tr><td>May 28</td><td>Top teams submit code and a two-page report</td></tr><tr><td>June 1</td><td>Winners notified</td></tr><tr><td>Workshop day</td><td>Results, awards, and two winner talks</td></tr></tbody></table>
+<details class="proposal-details"><summary>Data and availability</summary><p>Training and validation use the public TouchScale release on Hugging Face (CC BY-NC 4.0, gated access). To date, the release provides 100 of the planned 500 hours (15,324 episodes, 929 tasks, and 22 scene types), recorded with a head RGB-D camera, two wrist cameras, and tactile gloves with 880 taxels per hand. We will publish official splits, with no participant overlap, on January 15, 2027.</p></details>
+<details class="proposal-details"><summary>Hidden test set</summary><p>The test set has two parts, and its labels stay hidden from participants. Split A holds about 10 hours that 2077AI will withhold from every public release, with participants and scenes unseen in training. Split B holds about 5 hours from at least 20 new participants, recorded at Texas A&amp;M from December 2026 to February 2027 with the same gloves and cameras. Half of the Split B participants will be female, and we record each participant's hand size. Each pad has its own contact threshold, set from its no-load noise floor and checked against a reference load cell. A pad is labeled in contact when its reading exceeds this threshold. Glove readings are resampled to the 30 Hz video timeline. Two annotators check 2,000 sampled test frames against the wrist cameras, and we publish their agreement with the glove labels.</p></details>
+<details class="proposal-details"><summary>Contingency</summary><p>If Split B is not finished by February 28, 2027 or Split A is not available, the ranking uses the available split alone. Robot-hand recordings with the same glove then form an unranked transfer track.</p></details>
+<details class="proposal-details"><summary>Prizes and conflicts of interest</summary><p>2077AI provides $1,000 in funding, split evenly between challenge prizes and travel grants. The organizers manage the funds and award $250 to the top team in each category. Fan is the last author of TouchScale, and Luo and Mukadam are co-authors. 2077AI hosts the data. Yang is not a TouchScale author, and he holds the test labels and signs off on the final ranking. Entries from the organizers' labs and TouchScale authors' labs appear as unranked reference entries. Entrants must cite TouchScale, as its license requires attribution. Data ethics are described in the Data ethics section below.</p></details>
+<details class="proposal-details"><summary>Data ethics</summary><p>PhySight works with egocentric recordings of people. TouchScale identifies participants only by pseudonymous IDs and is shared under CC BY-NC 4.0 with gated access. The TouchScale paper states that the data-collection vendor obtained informed consent from participants before recording. Before the challenge opens, we will publish these consent terms, and Split A will use only recordings whose consent covers benchmark use. Split B will be recorded under a Texas A&amp;M IRB protocol with informed consent that covers use in the challenge. Bystander faces in all challenge videos will be blurred before release. The current TouchScale release is predominantly male (95 of its 15,324 episodes come from female participants), so Split B balances female and male participants and the challenge reports the F1 gap between them. Estimating force from video could be misused to monitor workers without consent. The challenge terms prohibit identifying participants, and each team's two-page report states the misuse risks of its method.</p></details>
+<br><h3 class="title is-4" id="awards">Awards</h3>
+<ul style="margin-left:20px"><li><b>Best Paper</b></li><li><b>Best Student Paper</b> (student first-author papers)</li><li><b>Best Negative Result</b></li><li><b>Challenge prizes:</b> $250 to the top team in each of the two categories ($500 total)</li></ul>
+<br><h3 class="title is-4">Presentation Format</h3>
+<ul style="margin-left:20px"><li>All accepted submissions will be presented as posters.</li><li>Six selected papers will be presented in two oral sessions.</li><li>The proposed program includes a live visual-tactile demo and two challenge winner talks. Talks are planned to be streamed and recorded through the CVPR Zoom room, with moderated remote Q&amp;A.</li><li>A Slack channel is planned for announcements, challenge questions, and poster discussion.</li></ul>
+</div></section>
+
+<section class="section" id="sponsors"><div class="container is-max-desktop content"><h2 class="title">Sponsorship &amp; Travel Grants</h2>
+<p><a href="https://huggingface.co/2077AIDataFoundation" target="_blank" rel="noopener"><strong>2077AI</strong></a> is a confirmed industry partner providing <strong>$1,000</strong>: <strong>$500 for challenge prizes</strong> and <strong>$500 for travel grants</strong>. The organizers manage all sponsor and award funds.</p>
+<p>Travel grants reimburse lodging and other attendance costs for students and early-career researchers without travel funding, prioritizing first-time attendees and institutions and regions underrepresented at CVPR.</p>
+<p>After acceptance, we will seek additional industry support for keynote registration and student travel.</p></div></section>
+
+<section class="section" id="Organizers"><div class="container is-max-desktop content"><h2 class="title" id="organizers">Organizers</h2><div class="columns is-centered is-variable is-2 is-multiline has-text-centered"><div class="column is-one-quarter"><a href="https://zhiwenfan.github.io/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/zhiwen.png" alt="Zhiwen Fan" class="organizer-photo"><p class="organizer-name">Zhiwen Fan</p><p class="organizer-affiliation">Texas A&amp;M University</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://www.guandaoyang.com/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/guandao.jpg" alt="Guandao Yang" class="organizer-photo"><p class="organizer-name">Guandao Yang</p><p class="organizer-affiliation">University of Texas at Austin</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://yyueluo.com/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/yiyue.jpg" alt="Yiyue Luo" class="organizer-photo"><p class="organizer-name">Yiyue Luo</p><p class="organizer-affiliation">University of Washington</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://www.mustafamukadam.com/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/mustafa.png" alt="Mustafa Mukadam" class="organizer-photo"><p class="organizer-name">Mustafa Mukadam</p><p class="organizer-affiliation">Amazon FAR &amp; University of Washington</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://qianqianwang68.github.io/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/qianqian.jpg" alt="Qianqian Wang" class="organizer-photo"><p class="organizer-name">Qianqian Wang</p><p class="organizer-affiliation">Harvard University</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://vision.cs.yale.edu/members/alex-wong/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/alex.jpg" alt="Alex Wong" class="organizer-photo"><p class="organizer-name">Alex Wong</p><p class="organizer-affiliation">Yale University</p></div></a></div>
+<div class="column is-one-quarter"><a href="https://nuochen1203.github.io/" target="_blank" rel="noopener"><div class="organizer-card"><img src="./assets/nuo.jpg" alt="Nuo Chen" class="organizer-photo"><p class="organizer-name">Nuo Chen</p><p class="organizer-affiliation">Texas A&amp;M University</p></div></a></div>
+</div></div></section>
+
+
+
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <div class="content has-text-left">
+        <p>
+          Primary contact: <a href="mailto:zhiwenfan@tamu.edu">zhiwenfan@tamu.edu</a><br>Secondary contact: <a href="mailto:guandao@utexas.edu">guandao@utexas.edu</a>
+          <br>
+          Workshop: PhySight · CVPR 2027 proposal · Seattle, WA
+          <br><br>
+          This website is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          <br>
+          Adapted from <a href="https://stear-workshop.github.io/">STEAR Workshop</a>, which borrows the source code of <a href="https://github.com/nerfies/nerfies.github.io">this website</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
 </html>
